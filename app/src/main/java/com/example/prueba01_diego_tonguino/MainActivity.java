@@ -12,19 +12,15 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText DATNEtNombres;
     private EditText DATNEtApellidos;
-    private EditText DATNEtDividendo;
-    private EditText DATNEtDivisor;
-    private EditText DATNEtParteEntera;
-    private EditText DATNEtResiduo;
-    private EditText DATNEtNumInvertido;
+    private EditText DATNEtPrimerNumero;
+    private EditText DATNEtSegundoNumero;
+    private EditText DATNEtMultiplicacion;
+    private EditText DATNEtPotencia;
+    private EditText DATNEtFactorial;
     private Button DATNBtnSiguiente;
     private Button DATNBtnMostrar;
 
-    private String DATNNombresRecibidos = "";
-    private String DATNApellidosRecibidos = "";
-    private String DATNDividendoRecibido = "";
-    private String DATNDivisorRecibido = "";
-    private String DATNNumRecibido = "";
+    private String DATN_datos_todo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
         DATNEtNombres = findViewById(R.id.DATN_et_nombres);
         DATNEtApellidos = findViewById(R.id.DATN_et_apellidos);
-        DATNEtDividendo = findViewById(R.id.DATN_et_dividendo);
-        DATNEtDivisor = findViewById(R.id.DATN_et_divisor);
-        DATNEtParteEntera = findViewById(R.id.DATN_et_parte_entera);
-        DATNEtResiduo = findViewById(R.id.DATN_et_residuo);
-        DATNEtNumInvertido = findViewById(R.id.DATN_et_num_invertido);
+        DATNEtPrimerNumero = findViewById(R.id.DATN_et_primer_numero);
+        DATNEtSegundoNumero = findViewById(R.id.DATN_et_segundo_numero);
+        DATNEtMultiplicacion = findViewById(R.id.DATN_et_multiplicacion);
+        DATNEtPotencia = findViewById(R.id.DATN_et_potencia);
+        DATNEtFactorial = findViewById(R.id.DATN_et_factorial);
         DATNBtnSiguiente = findViewById(R.id.DATN_btn_siguiente);
         DATNBtnMostrar = findViewById(R.id.DATN_btn_mostrar);
+        
         DATNBtnMostrar.setEnabled(false);
 
         DATNBtnSiguiente.setOnClickListener(new View.OnClickListener() {
@@ -59,52 +56,70 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void DATNCalcularYMostrar() {
-        if (DATNDividendoRecibido.isEmpty() || DATNDivisorRecibido.isEmpty() || DATNNumRecibido.isEmpty()) {
-            return;
+        if (DATN_datos_todo == null || DATN_datos_todo.isEmpty()) return;
+
+        String[] partes = DATN_datos_todo.split("\\|");
+        if (partes.length < 4) return;
+
+        String nombres = partes[0];
+        String apellidos = partes[1];
+        int n1 = Integer.parseInt(partes[2]);
+        int n2 = Integer.parseInt(partes[3]);
+
+        // 1. MULTIPLICACION (n1 * n2) usando solo SUMAS
+        int multiplicacion = 0;
+        for (int i = 0; i < n2; i++) {
+            multiplicacion += n1;
         }
 
-        int DATNDividendo = Integer.parseInt(DATNDividendoRecibido);
-        int DATNDivisor = Integer.parseInt(DATNDivisorRecibido);
-        int DATNNum = Integer.parseInt(DATNNumRecibido);
-
-        // 1. PARTE ENTERA Y RESIDUO: Solo sumas y restas
-        int DATNParteEntera = 0;
-        int DATNResiduo = DATNDividendo;
-        if (DATNDivisor != 0) {
-            while (DATNResiduo >= DATNDivisor) {
-                DATNResiduo = DATNResiduo - DATNDivisor;
-                DATNParteEntera = DATNParteEntera + 1;
+        // 2. POTENCIA (n1 ^ n2) usando solo SUMAS
+        // Para n1^n2, multiplicamos 'n1' por sí mismo 'n2' veces.
+        // Cada multiplicación se hace con sumas.
+        long potencia = 1;
+        for (int i = 0; i < n2; i++) {
+            long tempSuma = 0;
+            for (int j = 0; j < n1; j++) {
+                tempSuma += potencia;
             }
+            potencia = tempSuma;
         }
 
-        // 2. INVERTIR: Forma matemática con (%, /, *, +, -)
-        int DATNInvertido = 0;
-        int DATNTempNum = DATNNum;
-        while (DATNTempNum > 0) {
-            int DATNDigito = DATNTempNum % 10;
-            DATNInvertido = (DATNInvertido * 10) + DATNDigito;
-            DATNTempNum = DATNTempNum / 10;
+        // 3. FACTORIAL (n1!) usando solo SUMAS
+        // Factorial de n1: 1 * 2 * 3 * ... * n1
+        long factorial = 1;
+        for (int i = 1; i <= n1; i++) {
+            long tempSumaFact = 0;
+            for (int j = 0; j < i; j++) {
+                tempSumaFact += factorial;
+            }
+            factorial = tempSumaFact;
         }
 
-        DATNEtNombres.setText(DATNNombresRecibidos);
-        DATNEtApellidos.setText(DATNApellidosRecibidos);
-        DATNEtDividendo.setText(String.valueOf(DATNDividendo));
-        DATNEtDivisor.setText(String.valueOf(DATNDivisor));
-        DATNEtParteEntera.setText(String.valueOf(DATNParteEntera));
-        DATNEtResiduo.setText(String.valueOf(DATNResiduo));
-        DATNEtNumInvertido.setText(String.valueOf(DATNInvertido));
+        DATNEtNombres.setText(nombres);
+        DATNEtApellidos.setText(apellidos);
+        DATNEtPrimerNumero.setText(String.valueOf(n1));
+        DATNEtSegundoNumero.setText(String.valueOf(n2));
+        DATNEtMultiplicacion.setText(String.valueOf(multiplicacion));
+        DATNEtPotencia.setText(String.valueOf(potencia));
+        DATNEtFactorial.setText(String.valueOf(factorial));
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
-            DATNNombresRecibidos = data.getStringExtra("DATN_nombres");
-            DATNApellidosRecibidos = data.getStringExtra("DATN_apellidos");
-            DATNDividendoRecibido = data.getStringExtra("DATN_dividendo");
-            DATNDivisorRecibido = data.getStringExtra("DATN_divisor");
-            DATNNumRecibido = data.getStringExtra("DATN_num");
+            // RECIBIR UNA SOLA VARIABLE
+            DATN_datos_todo = data.getStringExtra("DATN_VARIABLE_UNICA");
             DATNBtnMostrar.setEnabled(true);
+            
+            // Los campos permanecen vacíos al regresar
+            DATNEtNombres.setText("");
+            DATNEtApellidos.setText("");
+            DATNEtPrimerNumero.setText("");
+            DATNEtSegundoNumero.setText("");
+            DATNEtMultiplicacion.setText("");
+            DATNEtPotencia.setText("");
+            DATNEtFactorial.setText("");
         }
     }
 }

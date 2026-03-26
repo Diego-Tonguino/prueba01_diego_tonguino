@@ -9,37 +9,37 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombres:"
+        android:text="NOMBRES:"
         tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/DATN_et_nombres_s2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:enabled="true"
+        android:enabled="false"
         tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Apellidos:"
+        android:text="APELLIDOS:"
         tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/DATN_et_apellidos_s2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:enabled="true"
+        android:enabled="false"
         tools:ignore="Autofill,LabelFor,TextFields,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dividendo:"
+        android:text="PRIMER NUMERO:"
         tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/DATN_et_dividendo_s2"
+        android:id="@+id/DATN_et_primer_numero_s2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="false"
@@ -48,24 +48,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Divisor:"
+        android:text="SEGUNDO NUMERO:"
         tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/DATN_et_divisor_s2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Num:"
-        tools:ignore="HardcodedText" />
-
-    <EditText
-        android:id="@+id/DATN_et_num_s2"
+        android:id="@+id/DATN_et_segundo_numero_s2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="false"

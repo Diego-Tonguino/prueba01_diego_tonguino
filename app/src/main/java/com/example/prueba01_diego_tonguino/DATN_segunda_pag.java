@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,11 +13,13 @@ public class DATN_segunda_pag extends AppCompatActivity {
 
     private EditText DATN_et_nombres_s2;
     private EditText DATN_et_apellidos_s2;
-    private EditText DATN_et_dividendo_s2;
-    private EditText DATN_et_divisor_s2;
-    private EditText DATN_et_num_s2;
+    private EditText DATN_et_primer_numero_s2;
+    private EditText DATN_et_segundo_numero_s2;
     private Button DATN_btn_siguiente_s2;
     private Button DATN_btn_cerrar_s2;
+
+    // UNA SOLA VARIABLE PARA LOS DATOS
+    private String DATN_datos_locales = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +28,8 @@ public class DATN_segunda_pag extends AppCompatActivity {
 
         DATN_et_nombres_s2 = findViewById(R.id.DATN_et_nombres_s2);
         DATN_et_apellidos_s2 = findViewById(R.id.DATN_et_apellidos_s2);
-        DATN_et_dividendo_s2 = findViewById(R.id.DATN_et_dividendo_s2);
-        DATN_et_divisor_s2 = findViewById(R.id.DATN_et_divisor_s2);
-        DATN_et_num_s2 = findViewById(R.id.DATN_et_num_s2);
+        DATN_et_primer_numero_s2 = findViewById(R.id.DATN_et_primer_numero_s2);
+        DATN_et_segundo_numero_s2 = findViewById(R.id.DATN_et_segundo_numero_s2);
         DATN_btn_siguiente_s2 = findViewById(R.id.DATN_btn_siguiente_s2);
         DATN_btn_cerrar_s2 = findViewById(R.id.DATN_btn_cerrar_s2);
 
@@ -41,25 +43,35 @@ public class DATN_segunda_pag extends AppCompatActivity {
         DATN_btn_cerrar_s2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DATN_CerrarYSobrescribir();
+                DATN_ValidarYCerrar();
             }
         });
     }
 
     private void DATN_IrATercera() {
         Intent DATN_intent = new Intent(this, DATN_tercera_pag.class);
-        DATN_intent.putExtra("DATN_nombres", DATN_et_nombres_s2.getText().toString());
-        DATN_intent.putExtra("DATN_apellidos", DATN_et_apellidos_s2.getText().toString());
+        // Enviamos nombres y apellidos en una sola variable
+        String empaque = DATN_et_nombres_s2.getText().toString() + "|" + DATN_et_apellidos_s2.getText().toString();
+        DATN_intent.putExtra("DATN_VARIABLE_UNICA", empaque);
         startActivityForResult(DATN_intent, 1);
     }
 
-    private void DATN_CerrarYSobrescribir() {
+    private void DATN_ValidarYCerrar() {
+        String nombres = DATN_et_nombres_s2.getText().toString().trim();
+        String apellidos = DATN_et_apellidos_s2.getText().toString().trim();
+
+        if (nombres.isEmpty() || apellidos.isEmpty()) {
+            Toast.makeText(this, "Nombres y Apellidos no pueden estar vacíos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Empaquetamos todo en una sola variable: Nombres|Apellidos|N1|N2
+        String todo = nombres + "|" + apellidos + "|" +
+                DATN_et_primer_numero_s2.getText().toString() + "|" +
+                DATN_et_segundo_numero_s2.getText().toString();
+
         Intent DATN_resultIntent = new Intent();
-        DATN_resultIntent.putExtra("DATN_nombres", DATN_et_nombres_s2.getText().toString());
-        DATN_resultIntent.putExtra("DATN_apellidos", DATN_et_apellidos_s2.getText().toString());
-        DATN_resultIntent.putExtra("DATN_dividendo", DATN_et_dividendo_s2.getText().toString());
-        DATN_resultIntent.putExtra("DATN_divisor", DATN_et_divisor_s2.getText().toString());
-        DATN_resultIntent.putExtra("DATN_num", DATN_et_num_s2.getText().toString());
+        DATN_resultIntent.putExtra("DATN_VARIABLE_UNICA", todo);
         setResult(RESULT_OK, DATN_resultIntent);
         finish();
     }
@@ -68,14 +80,18 @@ public class DATN_segunda_pag extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
-            String DATN_div = data.getStringExtra("DATN_dividendo");
-            String DATN_dis = data.getStringExtra("DATN_divisor");
-            String DATN_n = data.getStringExtra("DATN_num");
+            // Recibimos la variable única de la pantalla 3
+            DATN_datos_locales = data.getStringExtra("DATN_VARIABLE_UNICA");
+            
+            // Desempaquetamos para mostrar en los campos
+            String[] partes = DATN_datos_locales.split("\\|");
+            if (partes.length >= 2) {
+                DATN_et_primer_numero_s2.setText(partes[0]);
+                DATN_et_segundo_numero_s2.setText(partes[1]);
+            }
 
-            DATN_et_dividendo_s2.setText(DATN_div);
-            DATN_et_divisor_s2.setText(DATN_dis);
-            DATN_et_num_s2.setText(DATN_n);
-
+            DATN_et_nombres_s2.setEnabled(true);
+            DATN_et_apellidos_s2.setEnabled(true);
             DATN_btn_cerrar_s2.setEnabled(true);
         }
     }

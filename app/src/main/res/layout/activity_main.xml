@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombres:"
+        android:text="NOMBRES:"
         tools:ignore="HardcodedText" />
 
     <EditText
@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Apellidos:"
+        android:text="APELLIDOS:"
         tools:ignore="HardcodedText" />
 
     <EditText
@@ -35,11 +35,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dividendo:"
+        android:text="PRIMER NUMERO:"
         tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/DATN_et_dividendo"
+        android:id="@+id/DATN_et_primer_numero"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="false"
@@ -48,11 +48,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Divisor:"
+        android:text="SEGUNDO NUMERO:"
         tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/DATN_et_divisor"
+        android:id="@+id/DATN_et_segundo_numero"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="false"
@@ -61,11 +61,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Parte entera:"
+        android:text="MULTIPLICACION:"
         tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/DATN_et_parte_entera"
+        android:id="@+id/DATN_et_multiplicacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="false"
@@ -74,11 +74,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Residuo:"
+        android:text="POTENCIA:"
         tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/DATN_et_residuo"
+        android:id="@+id/DATN_et_potencia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="false"
@@ -87,11 +87,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Num. Invertido:"
+        android:text="FACTORIAL:"
         tools:ignore="HardcodedText" />
 
     <EditText
-        android:id="@+id/DATN_et_num_invertido"
+        android:id="@+id/DATN_et_factorial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="false"
