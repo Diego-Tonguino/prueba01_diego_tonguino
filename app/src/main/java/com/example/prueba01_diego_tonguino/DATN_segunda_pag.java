@@ -18,7 +18,7 @@ public class DATN_segunda_pag extends AppCompatActivity {
     private Button DATN_btn_siguiente_s2;
     private Button DATN_btn_cerrar_s2;
 
-    // UNA SOLA VARIABLE PARA LOS DATOS
+    // una sola variable para los datos
     private String DATN_datos_locales = "";
 
     @Override
@@ -50,7 +50,7 @@ public class DATN_segunda_pag extends AppCompatActivity {
 
     private void DATN_IrATercera() {
         Intent DATN_intent = new Intent(this, DATN_tercera_pag.class);
-        // Enviamos nombres y apellidos en una sola variable
+        // nombres y apellidos en una sola variable
         String empaque = DATN_et_nombres_s2.getText().toString() + "|" + DATN_et_apellidos_s2.getText().toString();
         DATN_intent.putExtra("DATN_VARIABLE_UNICA", empaque);
         startActivityForResult(DATN_intent, 1);
@@ -65,7 +65,6 @@ public class DATN_segunda_pag extends AppCompatActivity {
             return;
         }
 
-        // Empaquetamos todo en una sola variable: Nombres|Apellidos|N1|N2
         String todo = nombres + "|" + apellidos + "|" +
                 DATN_et_primer_numero_s2.getText().toString() + "|" +
                 DATN_et_segundo_numero_s2.getText().toString();
@@ -80,10 +79,9 @@ public class DATN_segunda_pag extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
-            // Recibimos la variable única de la pantalla 3
+            // recibir variable única de la pantalla 3
             DATN_datos_locales = data.getStringExtra("DATN_VARIABLE_UNICA");
             
-            // Desempaquetamos para mostrar en los campos
             String[] partes = DATN_datos_locales.split("\\|");
             if (partes.length >= 2) {
                 DATN_et_primer_numero_s2.setText(partes[0]);

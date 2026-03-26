@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Button DATNBtnSiguiente;
     private Button DATNBtnMostrar;
 
+    // una sola variable para los datos
     private String DATN_datos_todo = "";
 
     @Override
@@ -66,15 +67,14 @@ public class MainActivity extends AppCompatActivity {
         int n1 = Integer.parseInt(partes[2]);
         int n2 = Integer.parseInt(partes[3]);
 
-        // 1. MULTIPLICACION (n1 * n2) usando solo SUMAS
+        // multiplicacion solo sumas
         int multiplicacion = 0;
         for (int i = 0; i < n2; i++) {
             multiplicacion += n1;
         }
 
-        // 2. POTENCIA (n1 ^ n2) usando solo SUMAS
-        // Para n1^n2, multiplicamos 'n1' por sí mismo 'n2' veces.
-        // Cada multiplicación se hace con sumas.
+        // potencia (n1 ^ n2) usando solo sumas
+        // para n1^n2, multiplicamos 'n1' por sí mismo 'n2' veces.
         long potencia = 1;
         for (int i = 0; i < n2; i++) {
             long tempSuma = 0;
@@ -84,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
             potencia = tempSuma;
         }
 
-        // 3. FACTORIAL (n1!) usando solo SUMAS
-        // Factorial de n1: 1 * 2 * 3 * ... * n1
+        // factorial (n1!) usando solo sumas
         long factorial = 1;
         for (int i = 1; i <= n1; i++) {
             long tempSumaFact = 0;
@@ -108,11 +107,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
-            // RECIBIR UNA SOLA VARIABLE
+            // recibir una sola variable
             DATN_datos_todo = data.getStringExtra("DATN_VARIABLE_UNICA");
             DATNBtnMostrar.setEnabled(true);
-            
-            // Los campos permanecen vacíos al regresar
+
             DATNEtNombres.setText("");
             DATNEtApellidos.setText("");
             DATNEtPrimerNumero.setText("");

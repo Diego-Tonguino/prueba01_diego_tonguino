@@ -62,7 +62,7 @@ public class DATN_tercera_pag extends AppCompatActivity {
                 return;
             }
 
-            // Uso de UNA SOLA VARIABLE con la misma llave que espera la ventana 2
+            // Uso de una sola variable con la misma llave que espera la ventana 2
             String DATN_numeros_juntos = s1 + "|" + s2;
 
             Intent DATN_resultIntent = new Intent();
